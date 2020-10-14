@@ -48,7 +48,6 @@ while not done:
     
     # 如果沒有碰撞取得滑鼠座標block方塊
 
-
     pygame.display.flip()
     clock.tick(60)
 
