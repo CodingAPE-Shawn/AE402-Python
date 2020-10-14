@@ -1,11 +1,20 @@
 import pygame
-black = (0,0,0)
-red = (255,0,0)
-
+import random
 pygame.init()
-windowSize = (400, 300)
+
+
+def randColour():
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+    return (r, g, b)
+
+windowSize = [400, 300]
 screen = pygame.display.set_mode(windowSize)
 clock = pygame.time.Clock()
+
+black = pygame.color.Color("#000000")
+colour = randColour()
 
 count = 0
 click = False #控制判斷是否點擊
@@ -20,13 +29,23 @@ while not done:
             pos = pygame.mouse.get_pos()
             click = True
             count = 0
+            colour = randColour()
         if event.type == pygame.QUIT:
             done = True
     if click and count < limit:
-        pygame.draw.circle(screen, red, pos, count)
+        pygame.draw.circle(screen, colour, pos, count)
         count += 1
         if count >= limit:
             click = False
     pygame.display.flip()
     clock.tick(60)
 pygame.quit()
+
+
+
+
+
+
+
+
+
