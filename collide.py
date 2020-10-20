@@ -43,10 +43,16 @@ while not done:
     screen.fill(WHITE)
 
     # 取得滑鼠座標
+    pos = pygame.mouse.get_pos()
     
     # 畫出player
+    player_x = pos[0]
+    player_y = pos[1]
+    pygame.draw.rect(screen,RED,[player_x,player_y,player_w,player_h])
     
-    # 如果沒有碰撞取得滑鼠座標block方塊
+    # 如果沒有碰撞劃出block方塊
+    if not collision:
+        pygame.draw.rect(screen,BLACK,[block_x,block_y,block_w,block_h])
 
     pygame.display.flip()
     clock.tick(60)
