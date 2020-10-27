@@ -1,5 +1,5 @@
 """
-碰撞 -- 一對一
+碰撞 -- 一對多
 """
 import pygame
 import random
@@ -20,12 +20,18 @@ player_y = 0
 player_w = 50
 player_h = 50
 # block的初始位置
+
 block_w = 50
 block_h = 50
-block_x = random.randrange(screen_width-block_w)
-block_y = random.randrange(screen_height-block_h)
+block_x = []
+block_y = []
+collision = []
+for i in range(10):
+    block_x.append(random.randrange(screen_width-block_w))
+    block_y.append(random.randrange(screen_height-block_h))
+    collision.append(False)
 # 判斷有無撞到的布林變數
-collision = False
+
 # 分數
 score = 0
 # font物件
@@ -40,11 +46,12 @@ while not done:
         if event.type == pygame.QUIT: 
             done = True 
     # 判斷是否碰撞到了
-    xin = block_x<=player_x<=block_x+block_w or block_x<=player_x+player_w<=block_x+block_w
-    yin = block_y<=player_y<=block_y+block_h or block_y<=player_y+player_h<=block_y+block_h
-    if  xin and yin and not collision:
-        collision = True
-        score += 1
+    for i in range(10):
+        xin = block_x[i]<=player_x<=block_x[i]+block_w or block_x[i]<=player_x+player_w<=block_x[i]+block_w
+        yin = block_y[i]<=player_y<=block_y[i]+block_h or block_y[i]<=player_y+player_h<=block_y[i]+block_h
+        if  xin and yin and not collision[i]:
+            collision[i] = True
+            score += 1
         
     # 清除視窗畫面
     screen.fill(WHITE)
@@ -55,8 +62,9 @@ while not done:
     player_x = pos[0]
     player_y = pos[1]
     pygame.draw.rect(screen, RED, [player_x, player_y, player_w, player_h])
-    if not collision:
-        pygame.draw.rect(screen, BLACK, [block_x, block_y, block_w, block_h])
+    for i in range(10):
+        if not collision[i]:
+            pygame.draw.rect(screen, BLACK, [block_x[i], block_y[i], block_w, block_h])
 
     # 顯示分數
     message = str(score)+' point'
