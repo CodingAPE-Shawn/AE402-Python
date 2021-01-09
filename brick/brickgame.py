@@ -11,9 +11,7 @@ background.fill((255,255,255))
 allsprite = pygame.sprite.Group()  #建立全部角色群組
 bricks = pygame.sprite.Group()  #建立磚塊角色群組
 ball = Ball(10, 300, 200, 30, (255,0,0),edge=3)  #建立紅色球物件
-#ball1 = Ball(10, 300, 200, 30, (0,0,255),edge=3)
 allsprite.add(ball)  #加入全部角色群組
-#allsprite.add(ball1)  #加入全部角色群組
 pad = Pad()  #建立滑板球物件
 allsprite.add(pad)  #加入全部角色群組
 clock = pygame.time.Clock()
@@ -48,23 +46,6 @@ while running:
         hitpad = pygame.sprite.collide_rect(ball, pad)  #檢查球和滑板碰撞
         if hitpad:  #球和滑板發生碰撞
             ball.bounceup()  #球反彈
-        
-#        fail1 = ball1.update()  #移動球體
-#        if fail1:  #球出界
-#            running = False
-#        pad.update()  #更新滑板位置
-#        hitbrick1 = pygame.sprite.spritecollide(ball1, bricks, True)  #檢查球和磚塊碰撞
-#        if len(hitbrick1) > 0:  #球和磚塊發生碰撞
-#            ball1.rect.y += 20  #球向下移
-#            ball1.bounceup()  #球反彈
-#        hitpad1 = pygame.sprite.collide_rect(ball1, pad)  #檢查球和滑板碰撞
-#        if hitpad1:  #球和滑板發生碰撞
-#            ball1.bounceup()  #球反彈
         allsprite.draw(screen)  #繪製所有角色
-#        result = pygame.sprite.collide_rect(ball, ball1)
-#        if result == True:
-#            ball.collidebounce()
-#            ball1.collidebounce()
-
     pygame.display.flip()
 pygame.quit()
