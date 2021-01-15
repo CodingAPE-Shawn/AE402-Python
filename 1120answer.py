@@ -26,3 +26,4 @@ while not done:
     clock.tick(40)
 
 pygame.quit()
+# test
